@@ -1,8 +1,4 @@
-﻿using System.IO;
-using System.Net.Http.Json;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Xml.Linq;
 
 namespace MeetingManager
 {
@@ -22,7 +18,6 @@ namespace MeetingManager
             this.PersonList = new List<string?>();
         }
     }
-
 
     public class Program
     {
@@ -48,7 +43,6 @@ namespace MeetingManager
                 Console.WriteLine("Meeting Manager App\r");
                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~\n");
 
-
                 Console.WriteLine("Choose an option from the following list:");
                 Console.WriteLine("\ta - Create a new meeting");
                 Console.WriteLine("\tb - Delete a meeting");
@@ -57,10 +51,8 @@ namespace MeetingManager
                 Console.WriteLine("\te - List all meetings");
                 Console.Write("Select an option: \n");
 
-
                 string fileName = "MeetingList.json";
                 var options = new JsonSerializerOptions { WriteIndented = true };
-
 
                 // branch out depending on the selection
                 switch (Console.ReadLine())
@@ -75,6 +67,7 @@ namespace MeetingManager
 
                         Console.WriteLine($"Provide the name of the person responsible for the meeting:");
                         meeting.ResponsiblePerson = Convert.ToString(Console.ReadLine());
+                        meeting.PersonList.Add(meeting.ResponsiblePerson);
 
                         Console.WriteLine($"Provide a description of the meeting:");
                         meeting.Description = Convert.ToString(Console.ReadLine());
@@ -153,7 +146,6 @@ namespace MeetingManager
                             Console.WriteLine("Meeting successfully added.");
                         }
                         Console.WriteLine(File.ReadAllText(fileName));
-
                         break;
                     // delete a meeting
                     case "b":
@@ -248,9 +240,7 @@ namespace MeetingManager
                             Console.WriteLine("Start date: " + m.StartDate);
                             Console.WriteLine("End date: " + m.EndDate + "\n");
                         }
-
                         // filtering options
-
                         Console.WriteLine("Filter by:");
                         Console.WriteLine("\ta description");
                         Console.WriteLine("\tb responsible person");
@@ -259,7 +249,6 @@ namespace MeetingManager
                         Console.WriteLine("\te date");
                         Console.WriteLine("\tf number of attendees");
                         Console.WriteLine("\tg back to main menu");
-
 
                         switch (Console.ReadLine())
                         {
@@ -324,7 +313,6 @@ namespace MeetingManager
                                     Console.WriteLine("\tb Hub");
                                     Console.WriteLine("\tc Short");
                                     Console.WriteLine("\td TeamBuilding");
-
 
                                     switch (Console.ReadLine())
                                     {
@@ -567,7 +555,6 @@ namespace MeetingManager
                                     break;
                                 }
                         }
-
                         break;
                 }
                 // continue back to main menu
